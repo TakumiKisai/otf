@@ -1129,7 +1129,7 @@ ${ago(m.joined)}
 
 const top3=clean.slice(0,3);
 
-document.getElementById('eliteWrap').innerHTML=
+document.getElementById('eliteWrap').innerHTML =
 top3.map((m,i)=>`
 
 <div class="elite-card">
@@ -1149,44 +1149,6 @@ href="https://www.chess.com/member/${m.username}"
 target="_blank">
 @${m.username}
 </a>
-
-<div class="elite-main">
-Rapid • ${m.ratings.rapid}
-</div>
-
-<div class="elite-hint">
-⊞ Click To Expand
-</div>
-
-</div>
-
-</div>
-
-<div class="elite-expand">
-
-<div class="stat-row">
-<span>Rapid</span>
-<span>${m.ratings.rapid}</span>
-</div>
-
-<div class="stat-row">
-<span>Blitz</span>
-<span>${m.ratings.blitz || '—'}</span>
-</div>
-
-<div class="stat-row">
-<span>Bullet</span>
-<span>${m.ratings.bullet || '—'}</span>
-</div>
-
-<div class="stat-row">
-<span>Daily</span>
-<span>${m.ratings.daily || '—'}</span>
-</div>
-
-</div>
-
-</div>
 
 <div class="elite-main">
 Rapid • ${m.ratings.rapid}
