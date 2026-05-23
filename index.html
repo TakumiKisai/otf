@@ -41,24 +41,39 @@ pointer-events:none;
 z-index:0;
 
 background:
-radial-gradient(circle at top left,
-rgba(255,255,255,.10) 0%,
-transparent 32%),
 
-radial-gradient(circle at bottom right,
-rgba(255,255,255,.07) 0%,
-transparent 34%),
+radial-gradient(
+circle at 15% 20%,
+rgba(255,255,255,.12) 0%,
+transparent 30%
+),
+
+radial-gradient(
+circle at 85% 80%,
+rgba(255,255,255,.08) 0%,
+transparent 34%
+),
+
+radial-gradient(
+circle at 50% 50%,
+rgba(255,255,255,.025) 0%,
+transparent 60%
+),
 
 linear-gradient(
 135deg,
-rgba(255,255,255,.025) 0%,
-transparent 20%,
-transparent 80%,
-rgba(255,255,255,.02) 100%
-);
+rgba(255,255,255,.018) 0%,
+transparent 18%,
+transparent 82%,
+rgba(255,255,255,.014) 100%
+),
 
-animation:bgFloat 14s ease-in-out infinite;
+#000;
+
+animation:bgFloat 12s ease-in-out infinite;
 }
+
+/* BLUEPRINT LINES */
 
 body::after{
 content:'';
@@ -68,36 +83,51 @@ pointer-events:none;
 z-index:0;
 
 background:
+
 repeating-linear-gradient(
 0deg,
 transparent 0px,
-transparent 46px,
-rgba(255,255,255,.028) 47px,
-transparent 48px
+transparent 58px,
+rgba(255,255,255,.018) 59px,
+transparent 60px
 ),
 
 repeating-linear-gradient(
 90deg,
 transparent 0px,
-transparent 46px,
-rgba(255,255,255,.022) 47px,
-transparent 48px
+transparent 58px,
+rgba(255,255,255,.014) 59px,
+transparent 60px
 );
 
-opacity:.22;
+opacity:.12;
 
-animation:gridMove 16s linear infinite;
+mix-blend-mode:screen;
+
+animation:gridMove 22s linear infinite;
 }
 
 @keyframes bgFloat{
 0%{
 transform:translateY(0px) scale(1);
 }
+
 50%{
-transform:translateY(-10px) scale(1.02);
+transform:translateY(-12px) scale(1.015);
 }
+
 100%{
 transform:translateY(0px) scale(1);
+}
+}
+
+@keyframes gridMove{
+0%{
+transform:translate(0px,0px);
+}
+
+100%{
+transform:translate(60px,60px);
 }
 }
 
@@ -695,7 +725,7 @@ The OTF Champions of Chess
 </div>
 
 <div class="hero-sub">
-Off-Topic Forums Community
+Off-Topic Forums Chess Community
 </div>
 
 <div class="owner-box">
