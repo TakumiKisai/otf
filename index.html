@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The OTF Champions of Chess</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+--bg:#050505;
+--bg2:#0f0f0f;
+--panel:#121212;
+--line:#2a2a2a;
+--soft:#9f9f9f;
+--text:#ffffff;
+}
+
+html,body{
+background:#000;
+font-family:'Inter',sans-serif;
+overflow-x:hidden;
+}
+
+/* BACKGROUND */
+  
+
+/* DELTARUNE-STYLE BACKGROUND UwU */
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:0;
+
+background:
+
+/* TOP LEFT GLOW */
+radial-gradient(
+circle at 12% 18%,
+rgba(255,255,255,.16) 0%,
+transparent 28%
+),
+
+/* BOTTOM RIGHT GLOW */
+radial-gradient(
+circle at 88% 82%,
+rgba(255,255,255,.10) 0%,
+transparent 32%
+),
+
+/* CENTER DEPTH */
+radial-gradient(
+circle at 50% 50%,
+rgba(255,255,255,.03) 0%,
+transparent 60%
+),
+
+/* ANGLED LIGHT */
+linear-gradient(
+135deg,
+rgba(255,255,255,.02) 0%,
+transparent 18%,
+transparent 82%,
+rgba(255,255,255,.015) 100%
+),
+
+/* BASE */
+#000;
+
+animation:bgFloat 12s ease-in-out infinite;
+}
+
+/* BLUEPRINT / BATTLE LINES */
+
+body::after{
+content:'';
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:0;
+
+background:
+
+/* HORIZONTAL */
+repeating-linear-gradient(
+0deg,
+transparent 0px,
+transparent 64px,
+rgba(255,255,255,.015) 65px,
+transparent 66px
+),
+
+/* VERTICAL */
+repeating-linear-gradient(
+90deg,
+transparent 0px,
+transparent 64px,
+rgba(255,255,255,.012) 65px,
+transparent 66px
+),
+
+/* EXTRA DIAGONAL ENERGY */
+linear-gradient(
+125deg,
+transparent 0%,
+rgba(255,255,255,.02) 48%,
+transparent 52%
+);
+
+opacity:.16;
+
+mix-blend-mode:screen;
+
+animation:gridMove 20s linear infinite;
+}
+
+@keyframes bgFloat{
+
+0%{
+transform:translateY(0px) scale(1);
+}
+
+50%{
+transform:translateY(-14px) scale(1.02);
+}
+
+100%{
+transform:translateY(0px) scale(1);
+}
+
+}
+
+@keyframes gridMove{
+
+0%{
+transform:translate(0px,0px);
+}
+
+100%{
+transform:translate(64px,64px);
+}
+
+}
+  
+/* WRAP */
+
+.wrap{
+position:relative;
+z-index:2;
+padding-bottom:40px;
+}
+
+/* SEPARATOR */
+
+.sep{
+display:flex;
+align-items:center;
+margin:24px 0;
+padding:0 18px;
+gap:14px;
+}
+
+.sep-line{
+height:1px;
+flex:1;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+position:relative;
+overflow:hidden;
+}
+
+.sep-line::after{
+content:'';
+position:absolute;
+top:0;
+left:-30%;
+width:30%;
+height:100%;
+background:linear-gradient(90deg,transparent,#fff,transparent);
+opacity:.35;
+animation:lineSweep 4s linear infinite;
+}
+
+@keyframes lineSweep{
+100%{
+left:130%;
+}
+}
+
+.sep-core{
+width:22px;
+height:22px;
+position:relative;
+flex-shrink:0;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.sep-core::before{
+content:'';
+position:absolute;
+width:100%;
+height:100%;
+border:1px solid rgba(255,255,255,.25);
+border-radius:50%;
+animation:ringSpin 8s linear infinite;
+}
+
+.sep-core::after{
+content:'';
+position:absolute;
+width:10px;
+height:10px;
+background:linear-gradient(135deg,#fff,#444);
+transform:rotate(45deg);
+box-shadow:
+0 0 12px rgba(255,255,255,.3),
+0 0 20px rgba(255,255,255,.1);
+animation:corePulse 2s ease-in-out infinite;
+}
+
+@keyframes ringSpin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+@keyframes corePulse{
+0%,100%{
+transform:rotate(45deg) scale(1);
+opacity:.8;
+}
+50%{
+transform:rotate(45deg) scale(1.2);
+opacity:1;
+}
+}
+
+/* HERO */
+
+.hero{
+padding:26px 18px 12px;
+text-align:center;
+position:relative;
+overflow:hidden;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+top:-20%;
+left:-15%;
+width:70%;
+height:70%;
+
+background:
+radial-gradient(circle,
+rgba(255,255,255,.16) 0%,
+transparent 70%);
+
+filter:blur(40px);
+
+animation:heroGlow1 8s ease-in-out infinite;
+pointer-events:none;
+}
+
+.hero::after{
+content:'';
+position:absolute;
+bottom:-25%;
+right:-15%;
+width:70%;
+height:70%;
+
+background:
+radial-gradient(circle,
+rgba(255,255,255,.10) 0%,
+transparent 70%);
+
+filter:blur(55px);
+
+animation:heroGlow2 9s ease-in-out infinite;
+pointer-events:none;
+}
+
+@keyframes heroGlow1{
+0%,100%{
+transform:translate(0px,0px);
+opacity:.55;
+}
+50%{
+transform:translate(12px,-8px);
+opacity:.8;
+}
+}
+
+@keyframes heroGlow2{
+0%,100%{
+transform:translate(0px,0px);
+opacity:.4;
+}
+50%{
+transform:translate(-10px,10px);
+opacity:.7;
+}
+}
+
+.hero-img{
+width:160px;
+height:160px;
+border-radius:14px;
+display:block;
+margin:0 auto 16px;
+border:1px solid rgba(255,255,255,.15);
+box-shadow:
+0 0 30px rgba(255,255,255,.08),
+0 0 60px rgba(255,255,255,.03);
+object-fit:cover;
+position:relative;
+z-index:2;
+}
+
+.hero-title{
+font-size:32px;
+font-weight:800;
+letter-spacing:-1px;
+color:#fff;
+line-height:1;
+position:relative;
+z-index:2;
+}
+
+.hero-sub{
+margin-top:8px;
+font-size:11px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:rgba(255,255,255,.5);
+position:relative;
+z-index:2;
+}
+
+.owner-box{
+margin-top:18px;
+padding:16px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.07);
+border-radius:12px;
+backdrop-filter:blur(10px);
+position:relative;
+z-index:2;
+}
+
+.owner-name{
+font-size:13px;
+font-weight:700;
+color:#fff;
+text-decoration:none;
+}
+
+.owner-name:hover{
+opacity:.7;
+}
+
+.owner-quote{
+margin-top:7px;
+font-size:12px;
+line-height:1.5;
+color:rgba(255,255,255,.62);
+}
+
+/* MAIN */
+
+.main{
+padding:0 16px;
+}
+
+/* SECTION */
+
+.section-title{
+display:flex;
+align-items:center;
+gap:10px;
+margin-bottom:16px;
+}
+
+.section-dot{
+width:10px;
+height:10px;
+background:#fff;
+border-radius:50%;
+box-shadow:0 0 10px rgba(255,255,255,.3);
+}
+
+.section-text{
+font-size:14px;
+font-weight:700;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#fff;
+}
+
+/* MEMBERS */
+
+.members{
+display:flex;
+flex-direction:column;
+gap:8px;
+}
+
+.member{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+border-radius:12px;
+transition:.2s ease;
+text-decoration:none;
+}
+
+.member:hover{
+transform:translateX(4px);
+background:rgba(255,255,255,.05);
+border-color:rgba(255,255,255,.14);
+}
+
+.member img{
+width:42px;
+height:42px;
+border-radius:10px;
+object-fit:cover;
+border:1px solid rgba(255,255,255,.12);
+}
+
+.member-info{
+flex:1;
+}
+
+.member-name{
+font-size:13px;
+font-weight:700;
+color:#fff;
+}
+
+.member-rating{
+font-size:11px;
+margin-top:3px;
+color:rgba(255,255,255,.55);
+}
+
+.member-time{
+font-size:10px;
+color:rgba(255,255,255,.35);
+}
+
+/* LEADERBOARD */
+
+.elite-wrap{
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.elite-card{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.07);
+border-radius:18px;
+overflow:hidden;
+transition:.25s ease;
+}
+
+.elite-card:hover{
+border-color:rgba(255,255,255,.18);
+box-shadow:0 0 22px rgba(255,255,255,.05);
+}
+
+.elite-top{
+padding:18px;
+cursor:pointer;
+display:flex;
+gap:16px;
+align-items:center;
+}
+
+.elite-rank{
+font-size:28px;
+font-weight:800;
+color:rgba(255,255,255,.16);
+}
+
+.elite-avatar{
+width:120px;
+height:120px;
+border-radius:16px;
+object-fit:cover;
+border:1px solid rgba(255,255,255,.1);
+}
+
+.elite-info{
+flex:1;
+}
+
+.elite-name{
+font-size:18px;
+font-weight:800;
+color:#fff;
+text-decoration:none;
+}
+
+.elite-name:hover{
+opacity:.7;
+}
+
+.elite-main{
+margin-top:8px;
+font-size:13px;
+color:rgba(255,255,255,.55);
+}
+
+.elite-hint{
+margin-top:10px;
+display:inline-flex;
+align-items:center;
+gap:6px;
+
+padding:6px 10px;
+
+border:1px solid rgba(255,255,255,.08);
+border-radius:999px;
+
+font-size:10px;
+font-weight:700;
+letter-spacing:1px;
+text-transform:uppercase;
+
+color:rgba(255,255,255,.55);
+
+background:rgba(255,255,255,.03);
+
+transition:.2s ease;
+}
+
+.elite-card:hover .elite-hint{
+border-color:rgba(255,255,255,.16);
+color:rgba(255,255,255,.82);
+transform:translateY(-1px);
+}
+
+.elite-expand{
+max-height:0;
+overflow:hidden;
+transition:max-height .4s ease,padding .4s ease;
+padding:0 18px;
+}
+
+.elite-card.active .elite-expand{
+max-height:220px;
+padding:0 18px 18px;
+}
+
+.stat-row{
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-top:1px solid rgba(255,255,255,.05);
+font-size:13px;
+}
+
+.stat-row span:first-child{
+color:rgba(255,255,255,.5);
+}
+
+.stat-row span:last-child{
+color:#fff;
+font-weight:700;
+}
+
+/* COMPACT */
+
+.compact-list{
+margin-top:16px;
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+.compact-player{
+display:flex;
+justify-content:space-between;
+padding:10px 14px;
+background:rgba(255,255,255,.025);
+border:1px solid rgba(255,255,255,.05);
+border-radius:10px;
+text-decoration:none;
+transition:.2s ease;
+}
+
+.compact-player:hover{
+transform:translateX(3px);
+border-color:rgba(255,255,255,.12);
+}
+
+.compact-player span:first-child{
+color:#fff;
+font-size:12px;
+font-weight:600;
+}
+
+.compact-player span:last-child{
+color:rgba(255,255,255,.5);
+font-size:12px;
+}
+
+/* SCOUTING */
+
+.invite-card{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:16px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.07);
+border-radius:14px;
+text-decoration:none;
+transition:.2s ease;
+}
+
+.invite-card:hover{
+transform:translateX(4px);
+border-color:rgba(255,255,255,.16);
+}
+
+.invite-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.invite-icon{
+font-size:20px;
+}
+
+.invite-title{
+font-size:13px;
+font-weight:700;
+color:#fff;
+}
+
+.invite-sub{
+font-size:11px;
+margin-top:3px;
+color:rgba(255,255,255,.5);
+}
+
+.invite-arrow{
+font-size:18px;
+color:rgba(255,255,255,.35);
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+margin-top:34px;
+}
+
+.footer-name{
+font-size:18px;
+font-weight:800;
+color:#fff;
+}
+
+.footer-credit{
+margin-top:7px;
+font-size:11px;
+letter-spacing:1.5px;
+text-transform:uppercase;
+color:rgba(255,255,255,.38);
+}
+
+.footer-credit a{
+color:#fff;
+font-weight:700;
+text-decoration:none;
+border-bottom:1px solid transparent;
+transition:.2s ease;
+}
+
+.footer-credit a:hover{
+border-bottom:1px solid rgba(255,255,255,.45);
+}
+
+.footer-copy{
+margin-top:8px;
+font-size:10px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:rgba(255,255,255,.28);
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<!-- TOP SEPARATOR -->
+
+<div class="sep">
+<div class="sep-line"></div>
+<div class="sep-core"></div>
+<div class="sep-line"></div>
+</div>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<img class="hero-img"
+src="https://images.chesscomfiles.com/uploads/v1/user/92880812.aab0816c.160x160o.5bbc275b479b.jpg">
+
+<div class="hero-title">
+The OTF Champions of Chess
+</div>
+
+<div class="hero-sub">
+Off-Topic Forums Chess Community
+</div>
+
+<div class="owner-box">
+
+<a class="owner-name"
+href="https://www.chess.com/member/DreamGoatOfMinecraft"
+target="_blank">
+@DreamGoatOfMinecraft
+</a>
+
+<div class="owner-quote">
+"Dream is the best gng."
+</div>
+
+</div>
+
+</div>
+
+<!-- HERO SEPARATOR -->
+
+<div class="sep">
+<div class="sep-line"></div>
+<div class="sep-core"></div>
+<div class="sep-line"></div>
+</div>
+
+<div class="main">
+
+<!-- NEW MEMBERS -->
+
+<div class="section-title">
+<div class="section-dot"></div>
+<div class="section-text">
+Newest Members
+</div>
+</div>
+
+<div class="members" id="membersList"></div>
+
+<!-- SEPARATOR -->
+
+<div class="sep">
+<div class="sep-line"></div>
+<div class="sep-core"></div>
+<div class="sep-line"></div>
+</div>
+
+<!-- LEADERBOARD -->
+
+<div class="section-title">
+<div class="section-dot"></div>
+<div class="section-text">
+Leaderboard
+</div>
+</div>
+
+<div class="elite-wrap" id="eliteWrap"></div>
+
+<div class="compact-list" id="compactList"></div>
+
+<!-- SEPARATOR -->
+
+<div class="sep">
+<div class="sep-line"></div>
+<div class="sep-core"></div>
+<div class="sep-line"></div>
+</div>
+
+<!-- SCOUTING -->
+
+<div class="section-title">
+<div class="section-dot"></div>
+<div class="section-text">
+Scouting Division
+</div>
+</div>
+
+<a class="invite-card"
+href="https://www.chess.com/clubs/forum/view/who-should-we-invite-8"
+target="_blank">
+
+<div class="invite-left">
+
+<div class="invite-icon">
+📡
+</div>
+
+<div>
+<div class="invite-title">
+Who Should We Invite?
+</div>
+
+<div class="invite-sub">
+Recruitment discussion & scouting
+</div>
+</div>
+
+</div>
+
+<div class="invite-arrow">
+›
+</div>
+
+</a>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<div class="footer-name">
+The OTF Champions of Chess
+</div>
+
+<div class="footer-credit">
+Owned by
+<a href="https://www.chess.com/member/DreamGoatOfMinecraft" target="_blank">
+@DreamGoatOfMinecraft
+</a>
+</div>
+
+<div class="footer-credit">
+Designed by
+<a href="https://www.chess.com/member/ProjectionSorcery" target="_blank">
+@ProjectionSorcery
+</a>
+</div>
+
+<div class="footer-copy">
+© 2026 · The OTF Champions of Chess
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function ago(ts){
+
+const s=Math.floor((Date.now()-ts*1000)/1000);
+
+if(s<60)return s+'s ago';
+if(s<3600)return Math.floor(s/60)+'m ago';
+if(s<86400)return Math.floor(s/3600)+'h ago';
+if(s<604800)return Math.floor(s/86400)+'d ago';
+
+return Math.floor(s/604800)+'w ago';
+
+}
+
+async function loadSidebar(){
+
+try{
+
+const res=await fetch('https://api.chess.com/pub/club/the-otf-champions-of-chess/members');
+const data=await res.json();
+
+const members=[
+...(data.weekly||[]),
+...(data.monthly||[])
+];
+
+const unique=[...new Map(members.map(x=>[x.username,x])).values()];
+
+const profiles=await Promise.all(unique.map(async m=>{
+
+try{
+
+const [player,stats]=await Promise.all([
+fetch('https://api.chess.com/pub/player/'+m.username).then(r=>r.json()),
+fetch('https://api.chess.com/pub/player/'+m.username+'/stats').then(r=>r.json())
+]);
+
+const ratings={
+rapid:stats.chess_rapid?.last?.rating||0,
+blitz:stats.chess_blitz?.last?.rating||0,
+bullet:stats.chess_bullet?.last?.rating||0,
+daily:stats.chess_daily?.last?.rating||0
+};
+
+return{
+username:m.username,
+avatar:player.avatar || 'https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/PedroPinhata/php8KzVYv.png',
+joined:m.joined,
+ratings
+};
+
+}catch{
+return null;
+}
+
+}));
+
+const clean=profiles.filter(Boolean);
+
+clean.sort((a,b)=>b.ratings.rapid-a.ratings.rapid);
+
+const newest=[...clean]
+.sort((a,b)=>b.joined-a.joined)
+.slice(0,3);
+
+document.getElementById('membersList').innerHTML=
+newest.map(m=>`
+
+<a class="member"
+href="https://www.chess.com/member/${m.username}"
+target="_blank">
+
+<img src="${m.avatar}">
+
+<div class="member-info">
+
+<div class="member-name">
+@${m.username}
+</div>
+
+<div class="member-rating">
+Rapid • ${m.ratings.rapid || 'Unrated'}
+</div>
+
+</div>
+
+<div class="member-time">
+${ago(m.joined)}
+</div>
+
+</a>
+
+`).join('');
+
+const top3=clean.slice(0,3);
+
+document.getElementById('eliteWrap').innerHTML=
+top3.map((m,i)=>`
+
+<div class="elite-card">
+
+<div class="elite-top">
+
+<div class="elite-rank">
+#${i+1}
+</div>
+
+<img class="elite-avatar" src="${m.avatar}">
+
+<div class="elite-info">
+
+<a class="elite-name"
+href="https://www.chess.com/member/${m.username}"
+target="_blank">
+
+@${m.username}
+
+</a>
+
+<div class="elite-main">
+Rapid • ${m.ratings.rapid}
+</div>
+
+<div class="elite-hint">
+⊞ Click To Expand
+</div>
+
+</div>
+
+</div>
+
+<div class="elite-expand">
+
+<div class="stat-row">
+<span>Rapid</span>
+<span>${m.ratings.rapid}</span>
+</div>
+
+<div class="stat-row">
+<span>Blitz</span>
+<span>${m.ratings.blitz || '—'}</span>
+</div>
+
+<div class="stat-row">
+<span>Bullet</span>
+<span>${m.ratings.bullet || '—'}</span>
+</div>
+
+<div class="stat-row">
+<span>Daily</span>
+<span>${m.ratings.daily || '—'}</span>
+</div>
+
+</div>
+
+</div>
+
+`).join('');
+
+document.querySelectorAll('.elite-top').forEach(el=>{
+
+el.addEventListener('click',()=>{
+
+el.parentElement.classList.toggle('active');
+
+});
+
+});
+
+const compact=clean.slice(3,15);
+
+document.getElementById('compactList').innerHTML=
+compact.map((m,i)=>`
+
+<a class="compact-player"
+href="https://www.chess.com/member/${m.username}"
+target="_blank">
+
+<span>
+#${i+4} @${m.username}
+</span>
+
+<span>
+${m.ratings.rapid}
+</span>
+
+</a>
+
+`).join('');
+
+}catch(e){
+
+console.log(e);
+
+}
+
+}
+
+window.addEventListener('DOMContentLoaded',loadSidebar);
+
+</script>
+
+</body>
+</html>
