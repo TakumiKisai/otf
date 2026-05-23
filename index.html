@@ -1,0 +1,530 @@
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html,body{
+background:#050505;
+font-family:'Inter',sans-serif;
+color:white;
+overflow-x:hidden;
+}
+
+/* ROOT */
+:root{
+--bg:#050505;
+--bg2:#0c0c0c;
+--panel:#111111;
+--panel2:#161616;
+--line:#242424;
+--soft:#8e8e8e;
+--text:#ffffff;
+}
+
+/* WRAP */
+.wrap{
+min-height:100vh;
+background:
+radial-gradient(circle at top,rgba(255,255,255,.05),transparent 28%),
+linear-gradient(180deg,#050505,#080808 45%,#050505);
+position:relative;
+overflow:hidden;
+}
+
+/* BACKGROUND BLOBS */
+.blur{
+position:absolute;
+border-radius:50%;
+filter:blur(90px);
+opacity:.08;
+animation:floatBlur 9s ease-in-out infinite alternate;
+}
+
+.blur.one{
+width:320px;
+height:320px;
+background:white;
+top:-120px;
+left:-100px;
+}
+
+.blur.two{
+width:240px;
+height:240px;
+background:#ffffff;
+bottom:-80px;
+right:-80px;
+animation-duration:12s;
+}
+
+@keyframes floatBlur{
+from{
+transform:translateY(0px);
+}
+to{
+transform:translateY(25px);
+}
+}
+
+/* HERO */
+.hero{
+position:relative;
+padding:58px 20px 24px;
+display:flex;
+justify-content:center;
+z-index:2;
+}
+
+.hero-card{
+width:100%;
+max-width:420px;
+background:linear-gradient(
+180deg,
+rgba(255,255,255,.045),
+rgba(255,255,255,.02)
+);
+border:1px solid rgba(255,255,255,.08);
+border-radius:30px;
+padding:34px 24px;
+position:relative;
+overflow:hidden;
+backdrop-filter:blur(20px);
+box-shadow:
+0 10px 40px rgba(0,0,0,.45),
+inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+/* SHINE */
+.hero-card::before{
+content:'';
+position:absolute;
+top:0;
+left:-130%;
+width:60%;
+height:100%;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.08),
+transparent
+);
+transform:skewX(-20deg);
+animation:shine 7s linear infinite;
+}
+
+@keyframes shine{
+to{
+left:170%;
+}
+}
+
+/* PFP */
+.hero-pfp-wrap{
+display:flex;
+justify-content:center;
+margin-bottom:18px;
+}
+
+.hero-pfp{
+width:118px;
+height:118px;
+border-radius:50%;
+object-fit:cover;
+border:2px solid rgba(255,255,255,.12);
+box-shadow:
+0 0 0 8px rgba(255,255,255,.03),
+0 12px 30px rgba(0,0,0,.55);
+transition:.25s;
+}
+
+.hero-pfp:hover{
+transform:scale(1.03);
+}
+
+/* NAME */
+.hero-name{
+font-family:'Outfit',sans-serif;
+font-size:34px;
+font-weight:800;
+line-height:1;
+text-align:center;
+letter-spacing:-1.2px;
+margin-bottom:8px;
+}
+
+.hero-sub{
+text-align:center;
+font-size:13px;
+font-weight:500;
+color:#9f9f9f;
+letter-spacing:.3px;
+margin-bottom:18px;
+}
+
+/* OWNER */
+.owner-tag{
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:4px;
+margin-bottom:22px;
+}
+
+.owner-user{
+font-size:13px;
+font-weight:700;
+color:#ffffff;
+text-decoration:none;
+transition:.2s;
+}
+
+.owner-user:hover{
+opacity:.7;
+}
+
+.owner-role{
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#7f7f7f;
+}
+
+/* QUOTE */
+.hero-quote{
+font-size:13px;
+line-height:1.7;
+color:#d4d4d4;
+text-align:center;
+padding:14px 16px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+border-radius:18px;
+margin-bottom:22px;
+}
+
+/* SEPARATOR */
+.sep{
+position:relative;
+height:24px;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+margin:10px 0;
+}
+
+.sep::before{
+content:'';
+position:absolute;
+width:100%;
+height:1px;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.08),
+rgba(255,255,255,.22),
+rgba(255,255,255,.08),
+transparent
+);
+}
+
+.sep::after{
+content:'';
+position:absolute;
+width:140px;
+height:100%;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.22),
+transparent
+);
+filter:blur(1px);
+animation:sepSweep 3.2s ease-in-out infinite;
+}
+
+.sep-dot{
+width:8px;
+height:8px;
+border-radius:50%;
+background:white;
+position:relative;
+z-index:2;
+box-shadow:
+0 0 10px rgba(255,255,255,.9),
+0 0 20px rgba(255,255,255,.25);
+animation:dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes sepSweep{
+0%{
+transform:translateX(-220px);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+80%{
+opacity:1;
+}
+100%{
+transform:translateX(220px);
+opacity:0;
+}
+}
+
+@keyframes dotPulse{
+0%,100%{
+transform:scale(1);
+opacity:1;
+}
+50%{
+transform:scale(1.35);
+opacity:.65;
+}
+}
+
+/* MAIN */
+.main{
+padding:0 20px 30px;
+position:relative;
+z-index:2;
+}
+
+/* SECTION */
+.section{
+background:linear-gradient(
+180deg,
+rgba(255,255,255,.03),
+rgba(255,255,255,.015)
+);
+border:1px solid rgba(255,255,255,.06);
+border-radius:24px;
+padding:18px;
+margin-bottom:20px;
+box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+
+/* TITLES */
+.section-title{
+font-family:'Outfit',sans-serif;
+font-size:18px;
+font-weight:700;
+margin-bottom:5px;
+}
+
+.section-sub{
+font-size:12px;
+color:#8a8a8a;
+margin-bottom:16px;
+}
+
+/* MEMBERS */
+.members-list{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.member{
+display:flex;
+align-items:center;
+gap:12px;
+padding:12px;
+border-radius:18px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.05);
+text-decoration:none;
+transition:.18s;
+}
+
+.member:hover{
+transform:translateY(-2px);
+background:rgba(255,255,255,.05);
+border-color:rgba(255,255,255,.12);
+}
+
+.member img{
+width:42px;
+height:42px;
+border-radius:50%;
+object-fit:cover;
+}
+
+.member-name{
+font-size:14px;
+font-weight:700;
+color:white;
+}
+
+.member-meta{
+font-size:11px;
+color:#8d8d8d;
+margin-top:2px;
+}
+
+.member-time{
+margin-left:auto;
+font-size:11px;
+color:#7a7a7a;
+}
+
+/* FOOTER */
+.footer{
+padding:10px 20px 28px;
+text-align:center;
+font-size:11px;
+color:#686868;
+letter-spacing:.4px;
+}
+</style>
+
+<div class="wrap">
+
+<div class="blur one"></div>
+<div class="blur two"></div>
+
+<!-- HERO -->
+<div class="hero">
+<div class="hero-card">
+
+<div class="hero-pfp-wrap">
+<img class="hero-pfp" src="https://images.chesscomfiles.com/uploads/v1/user/92880812.aab0816c.160x160o.5bbc275b479b.jpg">
+</div>
+
+<div class="hero-name">
+OTF Champions
+</div>
+
+<div class="hero-sub">
+Modern Chess Community
+</div>
+
+<div class="owner-tag">
+<a class="owner-user" href="https://www.chess.com/member/DreamGoatOfMinecraft" target="_blank">
+@DreamGoatOfMinecraft
+</a>
+
+<div class="owner-role">
+OWNER OF THE CLUB
+</div>
+</div>
+
+<div class="hero-quote">
+“Greatness is built move by move.”
+</div>
+
+<div class="sep">
+<div class="sep-dot"></div>
+</div>
+
+</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- MEMBERS -->
+<div class="section">
+
+<div class="section-title">
+Newest Members
+</div>
+
+<div class="section-sub">
+Recently joined the club
+</div>
+
+<div class="members-list" id="membersList"></div>
+
+</div>
+
+</div>
+
+<div class="footer">
+© 2026 • OTF Champions of Chess
+</div>
+
+<script>
+/* MEMBER TIME */
+function ago(ts){
+const s=Math.floor((Date.now()-ts*1000)/1000);
+
+if(s<60)return s+'s ago';
+if(s<3600)return Math.floor(s/60)+'m ago';
+if(s<86400)return Math.floor(s/3600)+'h ago';
+if(s<604800)return Math.floor(s/86400)+'d ago';
+
+return Math.floor(s/604800)+'w ago';
+}
+
+/* MEMBERS */
+(async function(){
+
+try{
+
+const r=await fetch('https://api.chess.com/pub/club/the-otf-champions-of-chess/members');
+const d=await r.json();
+
+const all=[
+...(d.weekly||[]),
+...(d.monthly||[])
+]
+.sort((a,b)=>b.joined-a.joined)
+.slice(0,4);
+
+const rows=await Promise.all(all.map(async m=>{
+
+const pj=await fetch(
+'https://api.chess.com/pub/player/'+m.username
+).then(x=>x.json());
+
+return{
+u:m.username,
+av:pj.avatar || 'https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/default-pawn.png',
+j:m.joined
+};
+
+}));
+
+document.getElementById('membersList').innerHTML=
+rows.map(m=>`
+
+<a class="member"
+href="https://www.chess.com/member/${m.u}"
+target="_blank">
+
+<img src="${m.av}">
+
+<div>
+<div class="member-name">
+@${m.u}
+</div>
+
+<div class="member-meta">
+New member
+</div>
+</div>
+
+<div class="member-time">
+${ago(m.j)}
+</div>
+
+</a>
+
+`).join('');
+
+}catch(e){
+
+document.getElementById('membersList').innerHTML=
+'<div style="font-size:12px;color:#888;">Unable to load members.</div>';
+
+}
+
+})();
+</script>
