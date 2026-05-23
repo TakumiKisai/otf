@@ -1,5 +1,12 @@
-<!-- GOOGLE FONTS -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The OTF Champions of Chess</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 *{
@@ -8,369 +15,248 @@ padding:0;
 box-sizing:border-box;
 }
 
+:root{
+--bg:#050505;
+--bg2:#0f0f0f;
+--panel:#121212;
+--line:#2a2a2a;
+--soft:#9f9f9f;
+--text:#ffffff;
+--whiteGlow:rgba(255,255,255,.14);
+--whiteGlow2:rgba(255,255,255,.07);
+}
+
 html,body{
-background:#050505;
+background:#000;
 font-family:'Inter',sans-serif;
-color:white;
 overflow-x:hidden;
 }
 
-:root{
---bg:#050505;
---panel:rgba(255,255,255,.035);
---panel2:rgba(255,255,255,.05);
---line:rgba(255,255,255,.08);
---soft:#8b8b8b;
---text:#ffffff;
+/* BACKGROUND */
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
+radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 35%),
+radial-gradient(circle at bottom right, rgba(255,255,255,.04), transparent 40%);
+background-size:40px 40px,40px 40px,100% 100%,100% 100%;
+pointer-events:none;
+z-index:0;
+animation:bgShift 14s linear infinite;
 }
+
+@keyframes bgShift{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-10px);}
+100%{transform:translateY(0px);}
+}
+
+/* WRAP */
 
 .wrap{
-min-height:100vh;
+position:relative;
+z-index:2;
+padding-bottom:40px;
+}
+
+/* SEPARATOR */
+
+.sep{
+display:flex;
+align-items:center;
+margin:24px 0;
+padding:0 18px;
+gap:14px;
+}
+
+.sep-line{
+height:1px;
+flex:1;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
 position:relative;
 overflow:hidden;
-background:
-radial-gradient(circle at top,rgba(255,255,255,.05),transparent 30%),
-linear-gradient(180deg,#020202,#0b0b0b 45%,#020202);
 }
 
-/* BLUEPRINT GRID */
-.wrap::before{
+.sep-line::after{
 content:'';
 position:absolute;
-inset:0;
-background:
-linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-background-size:42px 42px;
-mask-image:linear-gradient(to bottom,rgba(255,255,255,.8),transparent 92%);
-transform:perspective(900px) rotateX(72deg) scale(2.2);
-transform-origin:center top;
-animation:gridMove 16s linear infinite;
-opacity:.75;
-pointer-events:none;
+top:0;
+left:-30%;
+width:30%;
+height:100%;
+background:linear-gradient(90deg,transparent,#fff,transparent);
+opacity:.4;
+animation:lineSweep 4s linear infinite;
 }
 
-/* SECONDARY GLOW LAYER */
-.wrap::after{
+@keyframes lineSweep{
+100%{
+left:130%;
+}
+}
+
+.sep-core{
+width:22px;
+height:22px;
+position:relative;
+flex-shrink:0;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.sep-core::before{
 content:'';
 position:absolute;
-inset:0;
-background:
-radial-gradient(circle at center,rgba(255,255,255,.045),transparent 45%),
-linear-gradient(120deg,transparent,rgba(255,255,255,.03),transparent);
-mix-blend-mode:screen;
-pointer-events:none;
-animation:bgSweep 10s ease-in-out infinite alternate;
-}
-
-@keyframes bgSweep{
-from{
-transform:translateX(-20px);
-opacity:.6;
-}
-to{
-transform:translateX(20px);
-opacity:1;
-}
-}
-
-@keyframes gridMove{
-from{
-background-position:0 0,0 0;
-}
-to{
-background-position:0 140px,140px 0;
-}
-}
-
-/* BLURS */
-.blur{
-position:absolute;
+width:100%;
+height:100%;
+border:1px solid rgba(255,255,255,.25);
 border-radius:50%;
-filter:blur(100px);
-opacity:.08;
-animation:floatBlur 12s ease-in-out infinite alternate;
+animation:ringSpin 8s linear infinite;
 }
 
-.blur.one{
-width:340px;
-height:340px;
-background:white;
-top:-120px;
-left:-120px;
+.sep-core::after{
+content:'';
+position:absolute;
+width:10px;
+height:10px;
+background:linear-gradient(135deg,#fff,#444);
+transform:rotate(45deg);
+box-shadow:
+0 0 12px rgba(255,255,255,.3),
+0 0 20px rgba(255,255,255,.1);
+animation:corePulse 2s ease-in-out infinite;
 }
 
-.blur.two{
-width:260px;
-height:260px;
-background:white;
-bottom:-80px;
-right:-80px;
-animation-duration:15s;
+@keyframes ringSpin{
+100%{
+transform:rotate(360deg);
+}
 }
 
-@keyframes floatBlur{
-from{
-transform:translateY(0px);
+@keyframes corePulse{
+0%,100%{
+transform:rotate(45deg) scale(1);
+opacity:.8;
 }
-to{
-transform:translateY(35px);
+50%{
+transform:rotate(45deg) scale(1.2);
+opacity:1;
 }
 }
 
 /* HERO */
+
 .hero{
+padding:26px 18px 12px;
+text-align:center;
 position:relative;
-padding:56px 20px 24px;
-display:flex;
-justify-content:center;
-z-index:2;
 }
 
-.hero-card{
-width:100%;
-max-width:420px;
-background:linear-gradient(
-180deg,
-rgba(255,255,255,.05),
-rgba(255,255,255,.025)
-);
-border:1px solid rgba(255,255,255,.09);
-border-radius:30px;
-padding:34px 24px;
-position:relative;
-overflow:hidden;
-backdrop-filter:blur(20px);
-box-shadow:
-0 12px 40px rgba(0,0,0,.5),
-0 0 80px rgba(255,255,255,.03),
-inset 0 1px 0 rgba(255,255,255,.04);
-}
-
-.hero-card::before{
+.hero::before{
 content:'';
 position:absolute;
-top:0;
-left:-140%;
-width:60%;
-height:100%;
-background:linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.08),
-transparent
-);
-transform:skewX(-20deg);
-animation:shine 8s linear infinite;
+inset:0;
+background:
+radial-gradient(circle at center, rgba(255,255,255,.08), transparent 55%);
+pointer-events:none;
 }
 
-@keyframes shine{
-to{
-left:180%;
-}
-}
-
-/* PFP */
-.hero-pfp-wrap{
-display:flex;
-justify-content:center;
-margin-bottom:20px;
-}
-
-.hero-pfp{
-width:120px;
-height:120px;
-border-radius:50%;
-object-fit:cover;
-border:2px solid rgba(255,255,255,.12);
+.hero-img{
+width:160px;
+height:160px;
+border-radius:14px;
+display:block;
+margin:0 auto 16px;
+border:1px solid rgba(255,255,255,.15);
 box-shadow:
-0 0 0 8px rgba(255,255,255,.03),
-0 15px 40px rgba(0,0,0,.55);
+0 0 30px rgba(255,255,255,.08),
+0 0 60px rgba(255,255,255,.03);
+object-fit:cover;
 }
 
-/* TEXT */
-.hero-name{
-font-family:'Outfit',sans-serif;
+.hero-title{
 font-size:32px;
 font-weight:800;
-line-height:1.05;
-text-align:center;
 letter-spacing:-1px;
-margin-bottom:10px;
+color:#fff;
+line-height:1;
 }
 
 .hero-sub{
-text-align:center;
-font-size:13px;
-font-weight:500;
-color:#a0a0a0;
-letter-spacing:.4px;
-margin-bottom:20px;
+margin-top:8px;
+font-size:11px;
+letter-spacing:4px;
+text-transform:uppercase;
+color:rgba(255,255,255,.5);
 }
 
-.owner-tag{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap:4px;
-margin-bottom:22px;
+.owner-box{
+margin-top:18px;
+padding:16px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.07);
+border-radius:12px;
+backdrop-filter:blur(10px);
 }
 
-.owner-user{
+.owner-name{
 font-size:13px;
 font-weight:700;
-color:white;
+color:#fff;
 text-decoration:none;
-transition:.2s;
 }
 
-.owner-user:hover{
+.owner-name:hover{
 opacity:.7;
 }
 
-.owner-role{
-font-size:11px;
-letter-spacing:2px;
-text-transform:uppercase;
-color:#787878;
-}
-
-.hero-quote{
-font-size:13px;
-line-height:1.7;
-color:#d5d5d5;
-text-align:center;
-padding:14px 16px;
-background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.06);
-border-radius:18px;
-margin-bottom:22px;
-}
-
-/* SEPARATOR */
-.sep{
-position:relative;
-height:24px;
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-margin:8px 0;
-}
-
-.sep::before{
-content:'';
-position:absolute;
-width:100%;
-height:1px;
-background:linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.08),
-rgba(255,255,255,.22),
-rgba(255,255,255,.08),
-transparent
-);
-}
-
-.sep::after{
-content:'';
-position:absolute;
-width:140px;
-height:100%;
-background:linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.22),
-transparent
-);
-filter:blur(1px);
-animation:sepSweep 3s ease-in-out infinite;
-}
-
-.sep-dot{
-width:8px;
-height:8px;
-border-radius:50%;
-background:white;
-position:relative;
-z-index:2;
-box-shadow:
-0 0 10px rgba(255,255,255,.9),
-0 0 18px rgba(255,255,255,.25);
-animation:dotPulse 2s ease-in-out infinite;
-}
-
-@keyframes sepSweep{
-0%{
-transform:translateX(-220px);
-opacity:0;
-}
-20%{
-opacity:1;
-}
-80%{
-opacity:1;
-}
-100%{
-transform:translateX(220px);
-opacity:0;
-}
-}
-
-@keyframes dotPulse{
-0%,100%{
-transform:scale(1);
-opacity:1;
-}
-50%{
-transform:scale(1.3);
-opacity:.7;
-}
-}
-
-/* MAIN */
-.main{
-padding:0 20px 28px;
-position:relative;
-z-index:2;
+.owner-quote{
+margin-top:7px;
+font-size:12px;
+line-height:1.5;
+color:rgba(255,255,255,.62);
 }
 
 /* SECTION */
-.section{
-background:linear-gradient(
-180deg,
-rgba(255,255,255,.04),
-rgba(255,255,255,.02)
-);
-border:1px solid rgba(255,255,255,.06);
-border-radius:24px;
-padding:18px;
-margin-bottom:20px;
-box-shadow:
-0 8px 26px rgba(0,0,0,.35),
-0 0 40px rgba(255,255,255,.015);
-backdrop-filter:blur(18px);
+
+.main{
+padding:0 16px;
 }
 
 .section-title{
-font-family:'Outfit',sans-serif;
-font-size:18px;
-font-weight:700;
-margin-bottom:5px;
-}
-
-.section-sub{
-font-size:12px;
-color:#8b8b8b;
+display:flex;
+align-items:center;
+gap:10px;
 margin-bottom:16px;
 }
 
-/* MEMBERS */
-.members-list{
+.section-dot{
+width:10px;
+height:10px;
+background:#fff;
+border-radius:50%;
+box-shadow:0 0 10px rgba(255,255,255,.3);
+}
+
+.section-text{
+font-size:14px;
+font-weight:700;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#fff;
+}
+
+/* NEW MEMBERS */
+
+.members{
 display:flex;
 flex-direction:column;
-gap:10px;
+gap:8px;
 }
 
 .member{
@@ -378,407 +264,426 @@ display:flex;
 align-items:center;
 gap:12px;
 padding:12px;
-border-radius:18px;
 background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.06);
+border-radius:12px;
+transition:.2s ease;
 text-decoration:none;
-transition:.18s;
 }
 
 .member:hover{
-transform:translateY(-2px);
+transform:translateX(4px);
 background:rgba(255,255,255,.05);
-border-color:rgba(255,255,255,.12);
+border-color:rgba(255,255,255,.14);
 }
 
 .member img{
 width:42px;
 height:42px;
-border-radius:50%;
+border-radius:10px;
 object-fit:cover;
+border:1px solid rgba(255,255,255,.12);
+}
+
+.member-info{
+flex:1;
 }
 
 .member-name{
-font-size:14px;
+font-size:13px;
 font-weight:700;
-color:white;
+color:#fff;
 }
 
-.member-meta{
+.member-rating{
 font-size:11px;
-color:#9a9a9a;
-margin-top:2px;
+margin-top:3px;
+color:rgba(255,255,255,.55);
 }
 
 .member-time{
-margin-left:auto;
-font-size:11px;
-color:#767676;
+font-size:10px;
+color:rgba(255,255,255,.35);
 }
 
-/* EVENTS */
-.events-toggle{
-width:100%;
-padding:16px 18px;
-border-radius:20px;
-border:1px solid rgba(255,255,255,.06);
-background:rgba(255,255,255,.03);
+/* LEADERBOARD */
+
+.elite-wrap{
 display:flex;
-align-items:center;
-justify-content:space-between;
+flex-direction:column;
+gap:14px;
+}
+
+.elite-card{
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.07);
+border-radius:18px;
+overflow:hidden;
+transition:.25s ease;
+}
+
+.elite-card:hover{
+border-color:rgba(255,255,255,.18);
+box-shadow:0 0 22px rgba(255,255,255,.05);
+}
+
+.elite-top{
+padding:18px;
 cursor:pointer;
-transition:.22s;
+display:flex;
+gap:16px;
+align-items:center;
 }
 
-.events-toggle:hover{
-background:rgba(255,255,255,.05);
-border-color:rgba(255,255,255,.12);
+.elite-rank{
+font-size:28px;
+font-weight:800;
+color:rgba(255,255,255,.16);
 }
 
-.events-arrow{
+.elite-avatar{
+width:120px;
+height:120px;
+border-radius:16px;
+object-fit:cover;
+border:1px solid rgba(255,255,255,.1);
+}
+
+.elite-info{
+flex:1;
+}
+
+.elite-name{
 font-size:18px;
-transition:.3s;
+font-weight:800;
+color:#fff;
+text-decoration:none;
 }
 
-.events-panel{
+.elite-name:hover{
+opacity:.7;
+}
+
+.elite-main{
+margin-top:8px;
+font-size:13px;
+color:rgba(255,255,255,.55);
+}
+
+.elite-expand{
 max-height:0;
 overflow:hidden;
-opacity:0;
-transition:
-max-height .6s ease,
-opacity .4s ease,
-margin-top .3s ease;
+transition:max-height .4s ease,padding .4s ease;
+padding:0 18px;
 }
 
-.events-panel.open{
-max-height:700px;
-opacity:1;
-margin-top:14px;
+.elite-card.active .elite-expand{
+max-height:220px;
+padding:0 18px 18px;
 }
 
-.events-panel.open + .events-toggle .events-arrow{
-transform:rotate(180deg);
-}
-
-.event-card{
+.stat-row{
 display:flex;
-align-items:center;
 justify-content:space-between;
-padding:14px 16px;
-border-radius:18px;
-background:rgba(255,255,255,.03);
+padding:10px 0;
+border-top:1px solid rgba(255,255,255,.05);
+font-size:13px;
+}
+
+.stat-row span:first-child{
+color:rgba(255,255,255,.5);
+}
+
+.stat-row span:last-child{
+color:#fff;
+font-weight:700;
+}
+
+/* COMPACT */
+
+.compact-list{
+margin-top:16px;
+display:flex;
+flex-direction:column;
+gap:6px;
+}
+
+.compact-player{
+display:flex;
+justify-content:space-between;
+padding:10px 14px;
+background:rgba(255,255,255,.025);
 border:1px solid rgba(255,255,255,.05);
-margin-bottom:10px;
+border-radius:10px;
 text-decoration:none;
-transition:.2s;
-animation:eventFade .45s ease;
+transition:.2s ease;
 }
 
-.event-card:hover{
-transform:translateY(-2px);
+.compact-player:hover{
+transform:translateX(3px);
 border-color:rgba(255,255,255,.12);
-background:rgba(255,255,255,.05);
 }
 
-@keyframes eventFade{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
+.compact-player span:first-child{
+color:#fff;
+font-size:12px;
+font-weight:600;
 }
 
-.event-left{
-display:flex;
-flex-direction:column;
-gap:3px;
+.compact-player span:last-child{
+color:rgba(255,255,255,.5);
+font-size:12px;
 }
 
-.event-title{
-font-size:14px;
-font-weight:700;
-color:white;
-}
+/* SCOUTING */
 
-.event-sub{
-font-size:11px;
-color:#8f8f8f;
-}
-
-.event-arrow{
-font-size:17px;
-color:white;
-opacity:.75;
-}
-
-/* SCOUT */
-.scout-card{
+.invite-card{
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:16px 18px;
-border-radius:20px;
+padding:16px;
 background:rgba(255,255,255,.03);
-border:1px solid rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.07);
+border-radius:14px;
 text-decoration:none;
-transition:.22s;
-position:relative;
-overflow:hidden;
+transition:.2s ease;
 }
 
-.scout-card::before{
-content:'';
-position:absolute;
-top:0;
-left:-130%;
-width:60%;
-height:100%;
-background:linear-gradient(
-90deg,
-transparent,
-rgba(255,255,255,.06),
-transparent
-);
-transform:skewX(-18deg);
-transition:.5s;
-}
-
-.scout-card:hover::before{
-left:180%;
-}
-
-.scout-card:hover{
-transform:translateY(-3px);
-border-color:rgba(255,255,255,.13);
-box-shadow:0 8px 24px rgba(0,0,0,.28);
-}
-
-.scout-left{
-display:flex;
-flex-direction:column;
-}
-
-.scout-title{
-font-size:14px;
-font-weight:700;
-color:white;
-margin-bottom:3px;
-}
-
-.scout-sub{
-font-size:11px;
-color:#8d8d8d;
-}
-
-.scout-arrow{
-font-size:18px;
-color:white;
-opacity:.7;
-transition:.2s;
-}
-
-.scout-card:hover .scout-arrow{
+.invite-card:hover{
 transform:translateX(4px);
-opacity:1;
+border-color:rgba(255,255,255,.16);
+}
+
+.invite-left{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.invite-icon{
+font-size:20px;
+}
+
+.invite-title{
+font-size:13px;
+font-weight:700;
+color:#fff;
+}
+
+.invite-sub{
+font-size:11px;
+margin-top:3px;
+color:rgba(255,255,255,.5);
+}
+
+.invite-arrow{
+font-size:18px;
+color:rgba(255,255,255,.35);
 }
 
 /* FOOTER */
+
 .footer{
-padding:10px 20px 30px;
 text-align:center;
+margin-top:34px;
+}
+
+.footer-name{
+font-size:18px;
+font-weight:800;
+color:#fff;
+}
+
+.footer-credit{
+margin-top:7px;
 font-size:11px;
-color:#666;
-letter-spacing:.4px;
-position:relative;
-z-index:2;
+letter-spacing:1.5px;
+text-transform:uppercase;
+color:rgba(255,255,255,.38);
+}
+
+.footer-credit a{
+color:#fff;
+font-weight:700;
+text-decoration:none;
+border-bottom:1px solid transparent;
+transition:.2s ease;
+}
+
+.footer-credit a:hover{
+border-bottom:1px solid rgba(255,255,255,.45);
+}
+
+.footer-copy{
+margin-top:8px;
+font-size:10px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:rgba(255,255,255,.28);
 }
 </style>
+</head>
+
+<body>
 
 <div class="wrap">
 
-<div class="blur one"></div>
-<div class="blur two"></div>
+<!-- TOP SEPARATOR -->
 
-<!-- HERO -->
-<div class="hero">
-
-<div class="hero-card">
-
-<div class="hero-pfp-wrap">
-<img class="hero-pfp" src="https://images.chesscomfiles.com/uploads/v1/user/92880812.aab0816c.160x160o.5bbc275b479b.jpg">
+<div class="sep">
+<div class="sep-line"></div>
+<div class="sep-core"></div>
+<div class="sep-line"></div>
 </div>
 
-<div class="hero-name">
-The OTF Champions<br>of Chess
+<!-- HERO -->
+
+<div class="hero">
+
+<img class="hero-img"
+src="https://images.chesscomfiles.com/uploads/v1/user/92880812.aab0816c.160x160o.5bbc275b479b.jpg">
+
+<div class="hero-title">
+The OTF Champions of Chess
 </div>
 
 <div class="hero-sub">
 Off-Topic Forums Community
 </div>
 
-<div class="owner-tag">
+<div class="owner-box">
 
-<a class="owner-user"
+<a class="owner-name"
 href="https://www.chess.com/member/DreamGoatOfMinecraft"
 target="_blank">
 @DreamGoatOfMinecraft
 </a>
 
-<div class="owner-role">
-OWNER OF THE CLUB
+<div class="owner-quote">
+"Dream is the best gng."
 </div>
 
 </div>
 
-<div class="hero-quote">
-“Dream is the best gng.”
 </div>
+
+<!-- HERO SEPARATOR -->
 
 <div class="sep">
-<div class="sep-dot"></div>
+<div class="sep-line"></div>
+<div class="sep-core"></div>
+<div class="sep-line"></div>
 </div>
 
-</div>
-</div>
-
-<!-- MAIN -->
 <div class="main">
 
-<!-- MEMBERS -->
-<div class="section">
+<!-- NEW MEMBERS -->
 
 <div class="section-title">
+<div class="section-dot"></div>
+<div class="section-text">
 Newest Members
 </div>
-
-<div class="section-sub">
-Recently joined the club
 </div>
 
-<div class="members-list" id="membersList"></div>
-
+<div class="members" id="membersList">
 </div>
 
-<!-- EVENTS -->
-<div class="section">
+<!-- SEPARATOR -->
+
+<div class="sep">
+<div class="sep-line"></div>
+<div class="sep-core"></div>
+<div class="sep-line"></div>
+</div>
+
+<!-- LEADERBOARD -->
 
 <div class="section-title">
-Upcoming Events
+<div class="section-dot"></div>
+<div class="section-text">
+Rapid Leaderboard
+</div>
 </div>
 
-<div class="section-sub">
-Scheduled club activities
+<div class="elite-wrap" id="eliteWrap">
 </div>
 
-<div class="events-toggle" onclick="toggleEvents()">
-
-<div>
-View Upcoming Events
+<div class="compact-list" id="compactList">
 </div>
 
-<div class="events-arrow" id="eventsArrow">
-▾
+<!-- SEPARATOR -->
+
+<div class="sep">
+<div class="sep-line"></div>
+<div class="sep-core"></div>
+<div class="sep-line"></div>
 </div>
 
-</div>
-
-<div class="events-panel" id="eventsPanel">
-
-<a class="event-card"
-href="https://www.chess.com/events"
-target="_blank">
-
-<div class="event-left">
-
-<div class="event-title">
-Weekly Arena
-</div>
-
-<div class="event-sub">
-Blitz tournament • Friday
-</div>
-
-</div>
-
-<div class="event-arrow">
-↗
-</div>
-
-</a>
-
-<a class="event-card"
-href="https://www.chess.com/events"
-target="_blank">
-
-<div class="event-left">
-
-<div class="event-title">
-Team Match
-</div>
-
-<div class="event-sub">
-Rapid event • Upcoming
-</div>
-
-</div>
-
-<div class="event-arrow">
-↗
-</div>
-
-</a>
-
-</div>
-
-</div>
-
-<!-- SCOUT -->
-<div class="section">
+<!-- SCOUTING -->
 
 <div class="section-title">
-Scouting Section
+<div class="section-dot"></div>
+<div class="section-text">
+Scouting Division
+</div>
 </div>
 
-<div class="section-sub">
-Community recruitment discussion
-</div>
-
-<a class="scout-card"
+<a class="invite-card"
 href="https://www.chess.com/clubs/forum/view/who-should-we-invite-8"
 target="_blank">
 
-<div class="scout-left">
+<div class="invite-left">
 
-<div class="scout-title">
+<div class="invite-icon">
+📡
+</div>
+
+<div>
+<div class="invite-title">
 Who Should We Invite?
 </div>
 
-<div class="scout-sub">
-Open community forum
+<div class="invite-sub">
+Recruitment discussion & scouting
+</div>
 </div>
 
 </div>
 
-<div class="scout-arrow">
-↗
+<div class="invite-arrow">
+›
 </div>
 
 </a>
 
-</div>
-
-</div>
+<!-- FOOTER -->
 
 <div class="footer">
-© 2026 • The OTF Champions of Chess
+
+<div class="footer-name">
+The OTF Champions of Chess
+</div>
+
+<div class="footer-credit">
+Designed by
+<a href="https://www.chess.com/member/ProjectionSorcery" target="_blank">
+@ProjectionSorcery
+</a>
+</div>
+
+<div class="footer-copy">
+© 2026 · The OTF Champions of Chess
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 <script>
 function ago(ts){
-
 const s=Math.floor((Date.now()-ts*1000)/1000);
 
 if(s<60)return s+'s ago';
@@ -789,81 +694,165 @@ if(s<604800)return Math.floor(s/86400)+'d ago';
 return Math.floor(s/604800)+'w ago';
 }
 
-(async function(){
+async function loadSidebar(){
 
 try{
 
-const r=await fetch('https://api.chess.com/pub/club/the-otf-champions-of-chess/members');
+const res=await fetch('https://api.chess.com/pub/club/the-otf-champions-of-chess/members');
+const data=await res.json();
 
-const d=await r.json();
+const members=[
+...(data.weekly||[]),
+...(data.monthly||[])
+];
 
-const all=[
-...(d.weekly||[]),
-...(d.monthly||[])
-]
-.sort((a,b)=>b.joined-a.joined)
-.slice(0,4);
+const unique=[...new Map(members.map(x=>[x.username,x])).values()];
 
-const rows=await Promise.all(all.map(async m=>{
+const profiles=await Promise.all(unique.map(async m=>{
 
-const [pj,st]=await Promise.all([
+try{
 
-fetch('https://api.chess.com/pub/player/'+m.username)
-.then(x=>x.json()),
-
-fetch('https://api.chess.com/pub/player/'+m.username+'/stats')
-.then(x=>x.json())
-
+const [player,stats]=await Promise.all([
+fetch('https://api.chess.com/pub/player/'+m.username).then(r=>r.json()),
+fetch('https://api.chess.com/pub/player/'+m.username+'/stats').then(r=>r.json())
 ]);
 
-const rats=[
-
-{t:'Rapid',v:st.chess_rapid?.last?.rating},
-{t:'Blitz',v:st.chess_blitz?.last?.rating},
-{t:'Bullet',v:st.chess_bullet?.last?.rating},
-{t:'Daily',v:st.chess_daily?.last?.rating}
-
-]
-.filter(x=>x.v)
-.sort((a,b)=>b.v-a.v);
-
-const best=rats[0]||{t:'?',v:'?'};
+const ratings={
+rapid:stats.chess_rapid?.last?.rating||0,
+blitz:stats.chess_blitz?.last?.rating||0,
+bullet:stats.chess_bullet?.last?.rating||0,
+daily:stats.chess_daily?.last?.rating||0
+};
 
 return{
-u:m.username,
-av:pj.avatar || 'https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/default-pawn.png',
-rt:best.t,
-rv:best.v,
-j:m.joined
+username:m.username,
+avatar:player.avatar || 'https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/PedroPinhata/php8KzVYv.png',
+joined:m.joined,
+ratings
 };
+
+}catch{
+return null;
+}
 
 }));
 
+const clean=profiles.filter(Boolean);
+
+clean.sort((a,b)=>b.ratings.rapid-a.ratings.rapid);
+
+const newest=[...clean]
+.sort((a,b)=>b.joined-a.joined)
+.slice(0,3);
+
 document.getElementById('membersList').innerHTML=
-
-rows.map(m=>`
-
+newest.map(m=>`
 <a class="member"
-href="https://www.chess.com/member/${m.u}"
+href="https://www.chess.com/member/${m.username}"
 target="_blank">
 
-<img src="${m.av}">
+<img src="${m.avatar}">
 
-<div>
-
+<div class="member-info">
 <div class="member-name">
-@${m.u}
+@${m.username}
 </div>
 
-<div class="member-meta">
-${m.rt} • ${m.rv}
+<div class="member-rating">
+Rapid • ${m.ratings.rapid || 'Unrated'}
 </div>
-
 </div>
 
 <div class="member-time">
-${ago(m.j)}
+${ago(m.joined)}
 </div>
+
+</a>
+`).join('');
+
+const top3=clean.slice(0,3);
+
+document.getElementById('eliteWrap').innerHTML=
+top3.map((m,i)=>`
+
+<div class="elite-card">
+
+<div class="elite-top">
+
+<div class="elite-rank">
+#${i+1}
+</div>
+
+<img class="elite-avatar" src="${m.avatar}">
+
+<div class="elite-info">
+
+<a class="elite-name"
+href="https://www.chess.com/member/${m.username}"
+target="_blank">
+
+@${m.username}
+
+</a>
+
+<div class="elite-main">
+Rapid • ${m.ratings.rapid}
+</div>
+
+</div>
+
+</div>
+
+<div class="elite-expand">
+
+<div class="stat-row">
+<span>Rapid</span>
+<span>${m.ratings.rapid}</span>
+</div>
+
+<div class="stat-row">
+<span>Blitz</span>
+<span>${m.ratings.blitz || '—'}</span>
+</div>
+
+<div class="stat-row">
+<span>Bullet</span>
+<span>${m.ratings.bullet || '—'}</span>
+</div>
+
+<div class="stat-row">
+<span>Daily</span>
+<span>${m.ratings.daily || '—'}</span>
+</div>
+
+</div>
+
+</div>
+
+`).join('');
+
+document.querySelectorAll('.elite-top').forEach(el=>{
+el.addEventListener('click',()=>{
+el.parentElement.classList.toggle('active');
+});
+});
+
+const compact=clean.slice(3,15);
+
+document.getElementById('compactList').innerHTML=
+compact.map((m,i)=>`
+
+<a class="compact-player"
+href="https://www.chess.com/member/${m.username}"
+target="_blank">
+
+<span>
+#${i+4} @${m.username}
+</span>
+
+<span>
+${m.ratings.rapid}
+</span>
 
 </a>
 
@@ -871,25 +860,14 @@ ${ago(m.j)}
 
 }catch(e){
 
-document.getElementById('membersList').innerHTML=
-'<div style="font-size:12px;color:#888;">Unable to load members.</div>';
+console.log(e);
 
 }
 
-})();
-
-function toggleEvents(){
-
-const panel=document.getElementById('eventsPanel');
-const arrow=document.getElementById('eventsArrow');
-
-panel.classList.toggle('open');
-
-if(panel.classList.contains('open')){
-arrow.style.transform='rotate(180deg)';
-}else{
-arrow.style.transform='rotate(0deg)';
 }
 
-}
+window.addEventListener('DOMContentLoaded',loadSidebar);
 </script>
+
+</body>
+</html>
