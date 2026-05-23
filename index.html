@@ -18,48 +18,73 @@ overflow-x:hidden;
 /* ROOT */
 :root{
 --bg:#050505;
---bg2:#0c0c0c;
---panel:#111111;
---panel2:#161616;
---line:#242424;
---soft:#8e8e8e;
+--panel:rgba(255,255,255,.035);
+--panel2:rgba(255,255,255,.05);
+--line:rgba(255,255,255,.08);
+--soft:#8b8b8b;
 --text:#ffffff;
 }
 
 /* WRAP */
 .wrap{
 min-height:100vh;
-background:
-radial-gradient(circle at top,rgba(255,255,255,.05),transparent 28%),
-linear-gradient(180deg,#050505,#080808 45%,#050505);
 position:relative;
 overflow:hidden;
+background:
+radial-gradient(circle at top,rgba(255,255,255,.04),transparent 30%),
+linear-gradient(180deg,#050505,#090909 45%,#050505);
 }
 
-/* BACKGROUND BLOBS */
+/* BLUEPRINT GRID */
+.wrap::before{
+content:'';
+position:absolute;
+inset:0;
+background:
+linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+background-size:40px 40px;
+mask-image:linear-gradient(to bottom,rgba(255,255,255,.6),transparent 90%);
+transform:perspective(900px) rotateX(72deg) scale(2.2);
+transform-origin:center top;
+animation:gridMove 18s linear infinite;
+opacity:.55;
+pointer-events:none;
+}
+
+@keyframes gridMove{
+from{
+background-position:0 0,0 0;
+}
+to{
+background-position:0 120px,120px 0;
+}
+}
+
+/* BLUR ORBS */
 .blur{
 position:absolute;
 border-radius:50%;
 filter:blur(90px);
-opacity:.08;
-animation:floatBlur 9s ease-in-out infinite alternate;
+opacity:.06;
+animation:floatBlur 10s ease-in-out infinite alternate;
 }
 
 .blur.one{
-width:320px;
-height:320px;
+width:300px;
+height:300px;
 background:white;
-top:-120px;
+top:-100px;
 left:-100px;
 }
 
 .blur.two{
-width:240px;
-height:240px;
-background:#ffffff;
-bottom:-80px;
-right:-80px;
-animation-duration:12s;
+width:220px;
+height:220px;
+background:white;
+bottom:-60px;
+right:-60px;
+animation-duration:13s;
 }
 
 @keyframes floatBlur{
@@ -74,7 +99,7 @@ transform:translateY(25px);
 /* HERO */
 .hero{
 position:relative;
-padding:58px 20px 24px;
+padding:56px 20px 24px;
 display:flex;
 justify-content:center;
 z-index:2;
@@ -95,7 +120,7 @@ position:relative;
 overflow:hidden;
 backdrop-filter:blur(20px);
 box-shadow:
-0 10px 40px rgba(0,0,0,.45),
+0 12px 40px rgba(0,0,0,.45),
 inset 0 1px 0 rgba(255,255,255,.04);
 }
 
@@ -104,22 +129,22 @@ inset 0 1px 0 rgba(255,255,255,.04);
 content:'';
 position:absolute;
 top:0;
-left:-130%;
+left:-140%;
 width:60%;
 height:100%;
 background:linear-gradient(
 90deg,
 transparent,
-rgba(255,255,255,.08),
+rgba(255,255,255,.07),
 transparent
 );
 transform:skewX(-20deg);
-animation:shine 7s linear infinite;
+animation:shine 8s linear infinite;
 }
 
 @keyframes shine{
 to{
-left:170%;
+left:180%;
 }
 }
 
@@ -127,18 +152,18 @@ left:170%;
 .hero-pfp-wrap{
 display:flex;
 justify-content:center;
-margin-bottom:18px;
+margin-bottom:20px;
 }
 
 .hero-pfp{
-width:118px;
-height:118px;
+width:120px;
+height:120px;
 border-radius:50%;
 object-fit:cover;
-border:2px solid rgba(255,255,255,.12);
+border:2px solid rgba(255,255,255,.1);
 box-shadow:
 0 0 0 8px rgba(255,255,255,.03),
-0 12px 30px rgba(0,0,0,.55);
+0 15px 40px rgba(0,0,0,.5);
 transition:.25s;
 }
 
@@ -146,24 +171,25 @@ transition:.25s;
 transform:scale(1.03);
 }
 
-/* NAME */
+/* CLUB NAME */
 .hero-name{
 font-family:'Outfit',sans-serif;
-font-size:34px;
+font-size:32px;
 font-weight:800;
-line-height:1;
+line-height:1.05;
 text-align:center;
-letter-spacing:-1.2px;
-margin-bottom:8px;
+letter-spacing:-1px;
+margin-bottom:10px;
 }
 
+/* SUBTEXT */
 .hero-sub{
 text-align:center;
 font-size:13px;
 font-weight:500;
-color:#9f9f9f;
-letter-spacing:.3px;
-margin-bottom:18px;
+color:#989898;
+letter-spacing:.4px;
+margin-bottom:20px;
 }
 
 /* OWNER */
@@ -191,14 +217,14 @@ opacity:.7;
 font-size:11px;
 letter-spacing:2px;
 text-transform:uppercase;
-color:#7f7f7f;
+color:#7c7c7c;
 }
 
 /* QUOTE */
 .hero-quote{
 font-size:13px;
 line-height:1.7;
-color:#d4d4d4;
+color:#d5d5d5;
 text-align:center;
 padding:14px 16px;
 background:rgba(255,255,255,.03);
@@ -215,7 +241,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 overflow:hidden;
-margin:10px 0;
+margin:8px 0;
 }
 
 .sep::before{
@@ -241,11 +267,11 @@ height:100%;
 background:linear-gradient(
 90deg,
 transparent,
-rgba(255,255,255,.22),
+rgba(255,255,255,.2),
 transparent
 );
 filter:blur(1px);
-animation:sepSweep 3.2s ease-in-out infinite;
+animation:sepSweep 3s ease-in-out infinite;
 }
 
 .sep-dot{
@@ -256,8 +282,8 @@ background:white;
 position:relative;
 z-index:2;
 box-shadow:
-0 0 10px rgba(255,255,255,.9),
-0 0 20px rgba(255,255,255,.25);
+0 0 10px rgba(255,255,255,.8),
+0 0 18px rgba(255,255,255,.2);
 animation:dotPulse 2s ease-in-out infinite;
 }
 
@@ -284,14 +310,14 @@ transform:scale(1);
 opacity:1;
 }
 50%{
-transform:scale(1.35);
-opacity:.65;
+transform:scale(1.3);
+opacity:.7;
 }
 }
 
 /* MAIN */
 .main{
-padding:0 20px 30px;
+padding:0 20px 28px;
 position:relative;
 z-index:2;
 }
@@ -300,14 +326,15 @@ z-index:2;
 .section{
 background:linear-gradient(
 180deg,
-rgba(255,255,255,.03),
-rgba(255,255,255,.015)
+rgba(255,255,255,.035),
+rgba(255,255,255,.02)
 );
 border:1px solid rgba(255,255,255,.06);
 border-radius:24px;
 padding:18px;
 margin-bottom:20px;
-box-shadow:0 8px 24px rgba(0,0,0,.3);
+box-shadow:0 8px 26px rgba(0,0,0,.35);
+backdrop-filter:blur(18px);
 }
 
 /* TITLES */
@@ -320,7 +347,7 @@ margin-bottom:5px;
 
 .section-sub{
 font-size:12px;
-color:#8a8a8a;
+color:#8b8b8b;
 margin-bottom:16px;
 }
 
@@ -364,23 +391,96 @@ color:white;
 
 .member-meta{
 font-size:11px;
-color:#8d8d8d;
+color:#9a9a9a;
 margin-top:2px;
 }
 
 .member-time{
 margin-left:auto;
 font-size:11px;
-color:#7a7a7a;
+color:#767676;
+}
+
+/* SCOUT CARD */
+.scout-card{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:16px 18px;
+border-radius:20px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.06);
+text-decoration:none;
+transition:.22s;
+position:relative;
+overflow:hidden;
+}
+
+.scout-card::before{
+content:'';
+position:absolute;
+top:0;
+left:-130%;
+width:60%;
+height:100%;
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.06),
+transparent
+);
+transform:skewX(-18deg);
+transition:.5s;
+}
+
+.scout-card:hover::before{
+left:180%;
+}
+
+.scout-card:hover{
+transform:translateY(-3px);
+border-color:rgba(255,255,255,.13);
+box-shadow:0 8px 24px rgba(0,0,0,.28);
+}
+
+.scout-left{
+display:flex;
+flex-direction:column;
+}
+
+.scout-title{
+font-size:14px;
+font-weight:700;
+color:white;
+margin-bottom:3px;
+}
+
+.scout-sub{
+font-size:11px;
+color:#8d8d8d;
+}
+
+.scout-arrow{
+font-size:18px;
+color:white;
+opacity:.7;
+transition:.2s;
+}
+
+.scout-card:hover .scout-arrow{
+transform:translateX(4px);
+opacity:1;
 }
 
 /* FOOTER */
 .footer{
-padding:10px 20px 28px;
+padding:10px 20px 30px;
 text-align:center;
 font-size:11px;
-color:#686868;
+color:#666;
 letter-spacing:.4px;
+position:relative;
+z-index:2;
 }
 </style>
 
@@ -391,6 +491,7 @@ letter-spacing:.4px;
 
 <!-- HERO -->
 <div class="hero">
+
 <div class="hero-card">
 
 <div class="hero-pfp-wrap">
@@ -398,25 +499,29 @@ letter-spacing:.4px;
 </div>
 
 <div class="hero-name">
-OTF Champions
+The OTF Champions<br>of Chess
 </div>
 
 <div class="hero-sub">
-Modern Chess Community
+Off-Topic Forums Community
 </div>
 
 <div class="owner-tag">
-<a class="owner-user" href="https://www.chess.com/member/DreamGoatOfMinecraft" target="_blank">
+
+<a class="owner-user"
+href="https://www.chess.com/member/DreamGoatOfMinecraft"
+target="_blank">
 @DreamGoatOfMinecraft
 </a>
 
 <div class="owner-role">
 OWNER OF THE CLUB
 </div>
+
 </div>
 
 <div class="hero-quote">
-“Greatness is built move by move.”
+“Dream is the best gng.”
 </div>
 
 <div class="sep">
@@ -444,15 +549,50 @@ Recently joined the club
 
 </div>
 
+<!-- SCOUTING -->
+<div class="section">
+
+<div class="section-title">
+Scouting Section
+</div>
+
+<div class="section-sub">
+Community recruitment discussion
+</div>
+
+<a class="scout-card"
+href="https://www.chess.com/clubs/forum/view/who-should-we-invite-8"
+target="_blank">
+
+<div class="scout-left">
+
+<div class="scout-title">
+Who Should We Invite?
+</div>
+
+<div class="scout-sub">
+Open community forum
+</div>
+
+</div>
+
+<div class="scout-arrow">
+↗
+</div>
+
+</a>
+
+</div>
+
 </div>
 
 <div class="footer">
-© 2026 • OTF Champions of Chess
+© 2026 • The OTF Champions of Chess
 </div>
 
 <script>
-/* MEMBER TIME */
 function ago(ts){
+
 const s=Math.floor((Date.now()-ts*1000)/1000);
 
 if(s<60)return s+'s ago';
@@ -463,12 +603,12 @@ if(s<604800)return Math.floor(s/86400)+'d ago';
 return Math.floor(s/604800)+'w ago';
 }
 
-/* MEMBERS */
 (async function(){
 
 try{
 
 const r=await fetch('https://api.chess.com/pub/club/the-otf-champions-of-chess/members');
+
 const d=await r.json();
 
 const all=[
@@ -480,19 +620,41 @@ const all=[
 
 const rows=await Promise.all(all.map(async m=>{
 
-const pj=await fetch(
-'https://api.chess.com/pub/player/'+m.username
-).then(x=>x.json());
+const [pj,st]=await Promise.all([
+
+fetch('https://api.chess.com/pub/player/'+m.username)
+.then(x=>x.json()),
+
+fetch('https://api.chess.com/pub/player/'+m.username+'/stats')
+.then(x=>x.json())
+
+]);
+
+const rats=[
+
+{t:'Rapid',v:st.chess_rapid?.last?.rating},
+{t:'Blitz',v:st.chess_blitz?.last?.rating},
+{t:'Bullet',v:st.chess_bullet?.last?.rating},
+{t:'Daily',v:st.chess_daily?.last?.rating}
+
+]
+.filter(x=>x.v)
+.sort((a,b)=>b.v-a.v);
+
+const best=rats[0]||{t:'?',v:'?'};
 
 return{
 u:m.username,
 av:pj.avatar || 'https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/default-pawn.png',
+rt:best.t,
+rv:best.v,
 j:m.joined
 };
 
 }));
 
 document.getElementById('membersList').innerHTML=
+
 rows.map(m=>`
 
 <a class="member"
@@ -502,13 +664,15 @@ target="_blank">
 <img src="${m.av}">
 
 <div>
+
 <div class="member-name">
 @${m.u}
 </div>
 
 <div class="member-meta">
-New member
+${m.rt} • ${m.rv}
 </div>
+
 </div>
 
 <div class="member-time">
