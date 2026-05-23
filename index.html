@@ -9,6 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
+
 *{
 margin:0;
 padding:0;
@@ -22,8 +23,6 @@ box-sizing:border-box;
 --line:#2a2a2a;
 --soft:#9f9f9f;
 --text:#ffffff;
---whiteGlow:rgba(255,255,255,.14);
---whiteGlow2:rgba(255,255,255,.07);
 }
 
 html,body{
@@ -38,21 +37,77 @@ body::before{
 content:'';
 position:fixed;
 inset:0;
-background:
-linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
-radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 35%),
-radial-gradient(circle at bottom right, rgba(255,255,255,.04), transparent 40%);
-background-size:40px 40px,40px 40px,100% 100%,100% 100%;
 pointer-events:none;
 z-index:0;
-animation:bgShift 14s linear infinite;
+
+background:
+radial-gradient(circle at top left,
+rgba(255,255,255,.10) 0%,
+transparent 32%),
+
+radial-gradient(circle at bottom right,
+rgba(255,255,255,.07) 0%,
+transparent 34%),
+
+linear-gradient(
+135deg,
+rgba(255,255,255,.025) 0%,
+transparent 20%,
+transparent 80%,
+rgba(255,255,255,.02) 100%
+);
+
+animation:bgFloat 14s ease-in-out infinite;
 }
 
-@keyframes bgShift{
-0%{transform:translateY(0px);}
-50%{transform:translateY(-10px);}
-100%{transform:translateY(0px);}
+body::after{
+content:'';
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:0;
+
+background:
+repeating-linear-gradient(
+0deg,
+transparent 0px,
+transparent 46px,
+rgba(255,255,255,.028) 47px,
+transparent 48px
+),
+
+repeating-linear-gradient(
+90deg,
+transparent 0px,
+transparent 46px,
+rgba(255,255,255,.022) 47px,
+transparent 48px
+);
+
+opacity:.22;
+
+animation:gridMove 16s linear infinite;
+}
+
+@keyframes bgFloat{
+0%{
+transform:translateY(0px) scale(1);
+}
+50%{
+transform:translateY(-10px) scale(1.02);
+}
+100%{
+transform:translateY(0px) scale(1);
+}
+}
+
+@keyframes gridMove{
+0%{
+transform:translate(0px,0px);
+}
+100%{
+transform:translate(48px,48px);
+}
 }
 
 /* WRAP */
@@ -89,7 +144,7 @@ left:-30%;
 width:30%;
 height:100%;
 background:linear-gradient(90deg,transparent,#fff,transparent);
-opacity:.4;
+opacity:.35;
 animation:lineSweep 4s linear infinite;
 }
 
@@ -155,15 +210,67 @@ opacity:1;
 padding:26px 18px 12px;
 text-align:center;
 position:relative;
+overflow:hidden;
 }
 
 .hero::before{
 content:'';
 position:absolute;
-inset:0;
+top:-20%;
+left:-15%;
+width:70%;
+height:70%;
+
 background:
-radial-gradient(circle at center, rgba(255,255,255,.08), transparent 55%);
+radial-gradient(circle,
+rgba(255,255,255,.16) 0%,
+transparent 70%);
+
+filter:blur(40px);
+
+animation:heroGlow1 8s ease-in-out infinite;
 pointer-events:none;
+}
+
+.hero::after{
+content:'';
+position:absolute;
+bottom:-25%;
+right:-15%;
+width:70%;
+height:70%;
+
+background:
+radial-gradient(circle,
+rgba(255,255,255,.10) 0%,
+transparent 70%);
+
+filter:blur(55px);
+
+animation:heroGlow2 9s ease-in-out infinite;
+pointer-events:none;
+}
+
+@keyframes heroGlow1{
+0%,100%{
+transform:translate(0px,0px);
+opacity:.55;
+}
+50%{
+transform:translate(12px,-8px);
+opacity:.8;
+}
+}
+
+@keyframes heroGlow2{
+0%,100%{
+transform:translate(0px,0px);
+opacity:.4;
+}
+50%{
+transform:translate(-10px,10px);
+opacity:.7;
+}
 }
 
 .hero-img{
@@ -177,6 +284,8 @@ box-shadow:
 0 0 30px rgba(255,255,255,.08),
 0 0 60px rgba(255,255,255,.03);
 object-fit:cover;
+position:relative;
+z-index:2;
 }
 
 .hero-title{
@@ -185,6 +294,8 @@ font-weight:800;
 letter-spacing:-1px;
 color:#fff;
 line-height:1;
+position:relative;
+z-index:2;
 }
 
 .hero-sub{
@@ -193,6 +304,8 @@ font-size:11px;
 letter-spacing:4px;
 text-transform:uppercase;
 color:rgba(255,255,255,.5);
+position:relative;
+z-index:2;
 }
 
 .owner-box{
@@ -202,6 +315,8 @@ background:rgba(255,255,255,.03);
 border:1px solid rgba(255,255,255,.07);
 border-radius:12px;
 backdrop-filter:blur(10px);
+position:relative;
+z-index:2;
 }
 
 .owner-name{
@@ -222,11 +337,13 @@ line-height:1.5;
 color:rgba(255,255,255,.62);
 }
 
-/* SECTION */
+/* MAIN */
 
 .main{
 padding:0 16px;
 }
+
+/* SECTION */
 
 .section-title{
 display:flex;
@@ -251,7 +368,7 @@ text-transform:uppercase;
 color:#fff;
 }
 
-/* NEW MEMBERS */
+/* MEMBERS */
 
 .members{
 display:flex;
@@ -368,6 +485,35 @@ opacity:.7;
 margin-top:8px;
 font-size:13px;
 color:rgba(255,255,255,.55);
+}
+
+.elite-hint{
+margin-top:10px;
+display:inline-flex;
+align-items:center;
+gap:6px;
+
+padding:6px 10px;
+
+border:1px solid rgba(255,255,255,.08);
+border-radius:999px;
+
+font-size:10px;
+font-weight:700;
+letter-spacing:1px;
+text-transform:uppercase;
+
+color:rgba(255,255,255,.55);
+
+background:rgba(255,255,255,.03);
+
+transition:.2s ease;
+}
+
+.elite-card:hover .elite-hint{
+border-color:rgba(255,255,255,.16);
+color:rgba(255,255,255,.82);
+transform:translateY(-1px);
 }
 
 .elite-expand{
@@ -521,6 +667,7 @@ letter-spacing:2px;
 text-transform:uppercase;
 color:rgba(255,255,255,.28);
 }
+
 </style>
 </head>
 
@@ -586,8 +733,7 @@ Newest Members
 </div>
 </div>
 
-<div class="members" id="membersList">
-</div>
+<div class="members" id="membersList"></div>
 
 <!-- SEPARATOR -->
 
@@ -602,15 +748,13 @@ Newest Members
 <div class="section-title">
 <div class="section-dot"></div>
 <div class="section-text">
-Rapid Leaderboard
+Leaderboard
 </div>
 </div>
 
-<div class="elite-wrap" id="eliteWrap">
-</div>
+<div class="elite-wrap" id="eliteWrap"></div>
 
-<div class="compact-list" id="compactList">
-</div>
+<div class="compact-list" id="compactList"></div>
 
 <!-- SEPARATOR -->
 
@@ -666,6 +810,13 @@ The OTF Champions of Chess
 </div>
 
 <div class="footer-credit">
+Owned by
+<a href="https://www.chess.com/member/DreamGoatOfMinecraft" target="_blank">
+@DreamGoatOfMinecraft
+</a>
+</div>
+
+<div class="footer-credit">
 Designed by
 <a href="https://www.chess.com/member/ProjectionSorcery" target="_blank">
 @ProjectionSorcery
@@ -683,7 +834,9 @@ Designed by
 </div>
 
 <script>
+
 function ago(ts){
+
 const s=Math.floor((Date.now()-ts*1000)/1000);
 
 if(s<60)return s+'s ago';
@@ -692,6 +845,7 @@ if(s<86400)return Math.floor(s/3600)+'h ago';
 if(s<604800)return Math.floor(s/86400)+'d ago';
 
 return Math.floor(s/604800)+'w ago';
+
 }
 
 async function loadSidebar(){
@@ -747,6 +901,7 @@ const newest=[...clean]
 
 document.getElementById('membersList').innerHTML=
 newest.map(m=>`
+
 <a class="member"
 href="https://www.chess.com/member/${m.username}"
 target="_blank">
@@ -754,6 +909,7 @@ target="_blank">
 <img src="${m.avatar}">
 
 <div class="member-info">
+
 <div class="member-name">
 @${m.username}
 </div>
@@ -761,6 +917,7 @@ target="_blank">
 <div class="member-rating">
 Rapid • ${m.ratings.rapid || 'Unrated'}
 </div>
+
 </div>
 
 <div class="member-time">
@@ -768,6 +925,7 @@ ${ago(m.joined)}
 </div>
 
 </a>
+
 `).join('');
 
 const top3=clean.slice(0,3);
@@ -797,6 +955,10 @@ target="_blank">
 
 <div class="elite-main">
 Rapid • ${m.ratings.rapid}
+</div>
+
+<div class="elite-hint">
+⊞ Click To Expand
 </div>
 
 </div>
@@ -832,9 +994,13 @@ Rapid • ${m.ratings.rapid}
 `).join('');
 
 document.querySelectorAll('.elite-top').forEach(el=>{
+
 el.addEventListener('click',()=>{
+
 el.parentElement.classList.toggle('active');
+
 });
+
 });
 
 const compact=clean.slice(3,15);
@@ -867,6 +1033,7 @@ console.log(e);
 }
 
 window.addEventListener('DOMContentLoaded',loadSidebar);
+
 </script>
 
 </body>
