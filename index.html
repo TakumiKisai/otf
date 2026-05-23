@@ -15,7 +15,6 @@ color:white;
 overflow-x:hidden;
 }
 
-/* ROOT */
 :root{
 --bg:#050505;
 --panel:rgba(255,255,255,.035);
@@ -25,14 +24,13 @@ overflow-x:hidden;
 --text:#ffffff;
 }
 
-/* WRAP */
 .wrap{
 min-height:100vh;
 position:relative;
 overflow:hidden;
 background:
-radial-gradient(circle at top,rgba(255,255,255,.04),transparent 30%),
-linear-gradient(180deg,#050505,#090909 45%,#050505);
+radial-gradient(circle at top,rgba(255,255,255,.05),transparent 30%),
+linear-gradient(180deg,#020202,#0b0b0b 45%,#020202);
 }
 
 /* BLUEPRINT GRID */
@@ -41,15 +39,39 @@ content:'';
 position:absolute;
 inset:0;
 background:
-linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-background-size:40px 40px;
-mask-image:linear-gradient(to bottom,rgba(255,255,255,.6),transparent 90%);
+linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+background-size:42px 42px;
+mask-image:linear-gradient(to bottom,rgba(255,255,255,.8),transparent 92%);
 transform:perspective(900px) rotateX(72deg) scale(2.2);
 transform-origin:center top;
-animation:gridMove 18s linear infinite;
-opacity:.55;
+animation:gridMove 16s linear infinite;
+opacity:.75;
 pointer-events:none;
+}
+
+/* SECONDARY GLOW LAYER */
+.wrap::after{
+content:'';
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at center,rgba(255,255,255,.045),transparent 45%),
+linear-gradient(120deg,transparent,rgba(255,255,255,.03),transparent);
+mix-blend-mode:screen;
+pointer-events:none;
+animation:bgSweep 10s ease-in-out infinite alternate;
+}
+
+@keyframes bgSweep{
+from{
+transform:translateX(-20px);
+opacity:.6;
+}
+to{
+transform:translateX(20px);
+opacity:1;
+}
 }
 
 @keyframes gridMove{
@@ -57,34 +79,34 @@ from{
 background-position:0 0,0 0;
 }
 to{
-background-position:0 120px,120px 0;
+background-position:0 140px,140px 0;
 }
 }
 
-/* BLUR ORBS */
+/* BLURS */
 .blur{
 position:absolute;
 border-radius:50%;
-filter:blur(90px);
-opacity:.06;
-animation:floatBlur 10s ease-in-out infinite alternate;
+filter:blur(100px);
+opacity:.08;
+animation:floatBlur 12s ease-in-out infinite alternate;
 }
 
 .blur.one{
-width:300px;
-height:300px;
+width:340px;
+height:340px;
 background:white;
-top:-100px;
-left:-100px;
+top:-120px;
+left:-120px;
 }
 
 .blur.two{
-width:220px;
-height:220px;
+width:260px;
+height:260px;
 background:white;
-bottom:-60px;
-right:-60px;
-animation-duration:13s;
+bottom:-80px;
+right:-80px;
+animation-duration:15s;
 }
 
 @keyframes floatBlur{
@@ -92,7 +114,7 @@ from{
 transform:translateY(0px);
 }
 to{
-transform:translateY(25px);
+transform:translateY(35px);
 }
 }
 
@@ -110,21 +132,21 @@ width:100%;
 max-width:420px;
 background:linear-gradient(
 180deg,
-rgba(255,255,255,.045),
-rgba(255,255,255,.02)
+rgba(255,255,255,.05),
+rgba(255,255,255,.025)
 );
-border:1px solid rgba(255,255,255,.08);
+border:1px solid rgba(255,255,255,.09);
 border-radius:30px;
 padding:34px 24px;
 position:relative;
 overflow:hidden;
 backdrop-filter:blur(20px);
 box-shadow:
-0 12px 40px rgba(0,0,0,.45),
+0 12px 40px rgba(0,0,0,.5),
+0 0 80px rgba(255,255,255,.03),
 inset 0 1px 0 rgba(255,255,255,.04);
 }
 
-/* SHINE */
 .hero-card::before{
 content:'';
 position:absolute;
@@ -135,7 +157,7 @@ height:100%;
 background:linear-gradient(
 90deg,
 transparent,
-rgba(255,255,255,.07),
+rgba(255,255,255,.08),
 transparent
 );
 transform:skewX(-20deg);
@@ -160,18 +182,13 @@ width:120px;
 height:120px;
 border-radius:50%;
 object-fit:cover;
-border:2px solid rgba(255,255,255,.1);
+border:2px solid rgba(255,255,255,.12);
 box-shadow:
 0 0 0 8px rgba(255,255,255,.03),
-0 15px 40px rgba(0,0,0,.5);
-transition:.25s;
+0 15px 40px rgba(0,0,0,.55);
 }
 
-.hero-pfp:hover{
-transform:scale(1.03);
-}
-
-/* CLUB NAME */
+/* TEXT */
 .hero-name{
 font-family:'Outfit',sans-serif;
 font-size:32px;
@@ -182,17 +199,15 @@ letter-spacing:-1px;
 margin-bottom:10px;
 }
 
-/* SUBTEXT */
 .hero-sub{
 text-align:center;
 font-size:13px;
 font-weight:500;
-color:#989898;
+color:#a0a0a0;
 letter-spacing:.4px;
 margin-bottom:20px;
 }
 
-/* OWNER */
 .owner-tag{
 display:flex;
 flex-direction:column;
@@ -204,7 +219,7 @@ margin-bottom:22px;
 .owner-user{
 font-size:13px;
 font-weight:700;
-color:#ffffff;
+color:white;
 text-decoration:none;
 transition:.2s;
 }
@@ -217,10 +232,9 @@ opacity:.7;
 font-size:11px;
 letter-spacing:2px;
 text-transform:uppercase;
-color:#7c7c7c;
+color:#787878;
 }
 
-/* QUOTE */
 .hero-quote{
 font-size:13px;
 line-height:1.7;
@@ -267,7 +281,7 @@ height:100%;
 background:linear-gradient(
 90deg,
 transparent,
-rgba(255,255,255,.2),
+rgba(255,255,255,.22),
 transparent
 );
 filter:blur(1px);
@@ -282,8 +296,8 @@ background:white;
 position:relative;
 z-index:2;
 box-shadow:
-0 0 10px rgba(255,255,255,.8),
-0 0 18px rgba(255,255,255,.2);
+0 0 10px rgba(255,255,255,.9),
+0 0 18px rgba(255,255,255,.25);
 animation:dotPulse 2s ease-in-out infinite;
 }
 
@@ -326,18 +340,19 @@ z-index:2;
 .section{
 background:linear-gradient(
 180deg,
-rgba(255,255,255,.035),
+rgba(255,255,255,.04),
 rgba(255,255,255,.02)
 );
 border:1px solid rgba(255,255,255,.06);
 border-radius:24px;
 padding:18px;
 margin-bottom:20px;
-box-shadow:0 8px 26px rgba(0,0,0,.35);
+box-shadow:
+0 8px 26px rgba(0,0,0,.35),
+0 0 40px rgba(255,255,255,.015);
 backdrop-filter:blur(18px);
 }
 
-/* TITLES */
 .section-title{
 font-family:'Outfit',sans-serif;
 font-size:18px;
@@ -401,7 +416,105 @@ font-size:11px;
 color:#767676;
 }
 
-/* SCOUT CARD */
+/* EVENTS */
+.events-toggle{
+width:100%;
+padding:16px 18px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.06);
+background:rgba(255,255,255,.03);
+display:flex;
+align-items:center;
+justify-content:space-between;
+cursor:pointer;
+transition:.22s;
+}
+
+.events-toggle:hover{
+background:rgba(255,255,255,.05);
+border-color:rgba(255,255,255,.12);
+}
+
+.events-arrow{
+font-size:18px;
+transition:.3s;
+}
+
+.events-panel{
+max-height:0;
+overflow:hidden;
+opacity:0;
+transition:
+max-height .6s ease,
+opacity .4s ease,
+margin-top .3s ease;
+}
+
+.events-panel.open{
+max-height:700px;
+opacity:1;
+margin-top:14px;
+}
+
+.events-panel.open + .events-toggle .events-arrow{
+transform:rotate(180deg);
+}
+
+.event-card{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:14px 16px;
+border-radius:18px;
+background:rgba(255,255,255,.03);
+border:1px solid rgba(255,255,255,.05);
+margin-bottom:10px;
+text-decoration:none;
+transition:.2s;
+animation:eventFade .45s ease;
+}
+
+.event-card:hover{
+transform:translateY(-2px);
+border-color:rgba(255,255,255,.12);
+background:rgba(255,255,255,.05);
+}
+
+@keyframes eventFade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.event-left{
+display:flex;
+flex-direction:column;
+gap:3px;
+}
+
+.event-title{
+font-size:14px;
+font-weight:700;
+color:white;
+}
+
+.event-sub{
+font-size:11px;
+color:#8f8f8f;
+}
+
+.event-arrow{
+font-size:17px;
+color:white;
+opacity:.75;
+}
+
+/* SCOUT */
 .scout-card{
 display:flex;
 align-items:center;
@@ -549,7 +662,80 @@ Recently joined the club
 
 </div>
 
-<!-- SCOUTING -->
+<!-- EVENTS -->
+<div class="section">
+
+<div class="section-title">
+Upcoming Events
+</div>
+
+<div class="section-sub">
+Scheduled club activities
+</div>
+
+<div class="events-toggle" onclick="toggleEvents()">
+
+<div>
+View Upcoming Events
+</div>
+
+<div class="events-arrow" id="eventsArrow">
+▾
+</div>
+
+</div>
+
+<div class="events-panel" id="eventsPanel">
+
+<a class="event-card"
+href="https://www.chess.com/events"
+target="_blank">
+
+<div class="event-left">
+
+<div class="event-title">
+Weekly Arena
+</div>
+
+<div class="event-sub">
+Blitz tournament • Friday
+</div>
+
+</div>
+
+<div class="event-arrow">
+↗
+</div>
+
+</a>
+
+<a class="event-card"
+href="https://www.chess.com/events"
+target="_blank">
+
+<div class="event-left">
+
+<div class="event-title">
+Team Match
+</div>
+
+<div class="event-sub">
+Rapid event • Upcoming
+</div>
+
+</div>
+
+<div class="event-arrow">
+↗
+</div>
+
+</a>
+
+</div>
+
+</div>
+
+<!-- SCOUT -->
 <div class="section">
 
 <div class="section-title">
@@ -691,4 +877,19 @@ document.getElementById('membersList').innerHTML=
 }
 
 })();
+
+function toggleEvents(){
+
+const panel=document.getElementById('eventsPanel');
+const arrow=document.getElementById('eventsArrow');
+
+panel.classList.toggle('open');
+
+if(panel.classList.contains('open')){
+arrow.style.transform='rotate(180deg)';
+}else{
+arrow.style.transform='rotate(0deg)';
+}
+
+}
 </script>
