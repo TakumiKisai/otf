@@ -32,6 +32,9 @@ overflow-x:hidden;
 }
 
 /* BACKGROUND */
+  
+
+/* DELTARUNE-STYLE BACKGROUND UwU */
 
 body::before{
 content:'';
@@ -42,38 +45,43 @@ z-index:0;
 
 background:
 
+/* TOP LEFT GLOW */
 radial-gradient(
-circle at 15% 20%,
-rgba(255,255,255,.12) 0%,
-transparent 30%
+circle at 12% 18%,
+rgba(255,255,255,.16) 0%,
+transparent 28%
 ),
 
+/* BOTTOM RIGHT GLOW */
 radial-gradient(
-circle at 85% 80%,
-rgba(255,255,255,.08) 0%,
-transparent 34%
+circle at 88% 82%,
+rgba(255,255,255,.10) 0%,
+transparent 32%
 ),
 
+/* CENTER DEPTH */
 radial-gradient(
 circle at 50% 50%,
-rgba(255,255,255,.025) 0%,
+rgba(255,255,255,.03) 0%,
 transparent 60%
 ),
 
+/* ANGLED LIGHT */
 linear-gradient(
 135deg,
-rgba(255,255,255,.018) 0%,
+rgba(255,255,255,.02) 0%,
 transparent 18%,
 transparent 82%,
-rgba(255,255,255,.014) 100%
+rgba(255,255,255,.015) 100%
 ),
 
+/* BASE */
 #000;
 
 animation:bgFloat 12s ease-in-out infinite;
 }
 
-/* BLUEPRINT LINES */
+/* BLUEPRINT / BATTLE LINES */
 
 body::after{
 content:'';
@@ -84,62 +92,67 @@ z-index:0;
 
 background:
 
+/* HORIZONTAL */
 repeating-linear-gradient(
 0deg,
 transparent 0px,
-transparent 58px,
-rgba(255,255,255,.018) 59px,
-transparent 60px
+transparent 64px,
+rgba(255,255,255,.015) 65px,
+transparent 66px
 ),
 
+/* VERTICAL */
 repeating-linear-gradient(
 90deg,
 transparent 0px,
-transparent 58px,
-rgba(255,255,255,.014) 59px,
-transparent 60px
+transparent 64px,
+rgba(255,255,255,.012) 65px,
+transparent 66px
+),
+
+/* EXTRA DIAGONAL ENERGY */
+linear-gradient(
+125deg,
+transparent 0%,
+rgba(255,255,255,.02) 48%,
+transparent 52%
 );
 
-opacity:.12;
+opacity:.16;
 
 mix-blend-mode:screen;
 
-animation:gridMove 22s linear infinite;
+animation:gridMove 20s linear infinite;
 }
 
 @keyframes bgFloat{
+
 0%{
 transform:translateY(0px) scale(1);
 }
 
 50%{
-transform:translateY(-12px) scale(1.015);
+transform:translateY(-14px) scale(1.02);
 }
 
 100%{
 transform:translateY(0px) scale(1);
 }
+
 }
 
 @keyframes gridMove{
+
 0%{
 transform:translate(0px,0px);
 }
 
 100%{
-transform:translate(60px,60px);
-}
-}
-
-@keyframes gridMove{
-0%{
-transform:translate(0px,0px);
-}
-100%{
-transform:translate(48px,48px);
-}
+transform:translate(64px,64px);
 }
 
+}
+  
 /* WRAP */
 
 .wrap{
